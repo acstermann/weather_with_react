@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import "./styles.css";
+import Search from "./Search";
+import Forecast from "./Forecast";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+      <Search />
+      <Forecast />
+      <p>
         <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="https://github.com/acstermann/Weather_App_with_React"
+          className="ending"
         >
-          Learn React
+          Open-source code{" "}
         </a>
-      </header>
+        by Ann-Christin Stermann
+      </p>
     </div>
   );
 }
