@@ -11,7 +11,7 @@ function App() {
       <Forecast />
       <p>
         <a
-          href="https://github.com/acstermann/Weather_App_with_React"
+          href="https://github.com/acstermann/weather_with_react"
           className="ending"
         >
           Open-source code{" "}
