@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import "./styles.css";
-import Search from "./Search";
-import FormattedDate from "./FormattedDate";
 
 export default function Details(props) {
   return (
