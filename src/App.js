@@ -7,17 +7,19 @@ import Forecast from "./Forecast";
 function App() {
   return (
     <div className="App">
-      <Search />
-      <Forecast />
-      <p>
-        <a
-          href="https://github.com/acstermann/weather_with_react"
-          className="ending"
-        >
-          Open-source code{" "}
-        </a>
-        by Ann-Christin Stermann
-      </p>
+      <div className="container">
+        <Search defaultCity="Hamburg" />
+        <Forecast />
+        <p>
+          <a
+            href="https://github.com/acstermann/weather_with_react"
+            className="ending"
+          >
+            Open-source code{" "}
+          </a>
+          by Ann-Christin Stermann
+        </p>
+      </div>
     </div>
   );
 }
