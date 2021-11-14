@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./styles.css";
 import axios from "axios";
 import Hourly from "./Hourly";
+import FormattedDate from "./FormattedDate";
 
 export default function Search() {
   let [city, setCity] = useState("");
@@ -14,6 +15,7 @@ export default function Search() {
   let [felttemperature, setFelttemperature] = useState(null);
   let [description, setDescription] = useState(null);
   let [icon, setIcon] = useState("");
+  let [datum, setDatum] = useState("");
 
   function showTemperature(response) {
     setTemperature(response.data.main.temp);
@@ -27,6 +29,9 @@ export default function Search() {
     setIcon(
       `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
+    setDatum({
+      datum: new Date(response.data.dt * 1000),
+    });
   }
   function handleSubmit(event) {
     event.preventDefault();
@@ -68,7 +73,8 @@ export default function Search() {
           </a>
         </span>
       </h2>
-      <h4>Last updated on: Friday 14:00</h4>
+      <h4>Last updated on:</h4>
+      <FormattedDate date={setDatum.datum} />
       <Hourly />
       <div className="row2">
         <div className="col-12">Details for today:</div>
