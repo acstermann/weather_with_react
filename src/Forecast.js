@@ -1,38 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.css";
+import axios from "axios";
+import ForecastDay from "./ForecastDay";
 
-export default function Forecast() {
-  return (
-    <div className="Forecast">
-      <div className="card">
-        <div className="card-body">
-          <span id="tomorrow"></span>
-          <span id="info-tomorrow">22°C / 12°C</span>
+export default function Forecast(props) {
+  let [loaded, setLoaded] = useState(false);
+  let [forecast, setForecast] = useState(null);
+  function showForecast(response) {
+    setForecast(response.data.daily);
+    setLoaded(true);
+  }
+  if (loaded) {
+    return (
+      <div className="Forecast">
+        <div className="row">
+          {forecast.map(function (dailyForecast, index) {
+            if (index > 0) {
+              return (
+                <div className="col" key={index}>
+                  <ForecastDay data={dailyForecast} />
+                </div>
+              );
+            }
+          })}
         </div>
       </div>
-      <div className="card">
-        <div className="card-body">
-          <span id="twoDays"></span> <span id="info-twoDays">23°C / 13°C </span>
-        </div>
-      </div>
-      <div className="card">
-        <div className="card-body">
-          <span id="threeDays"></span>{" "}
-          <span id="info-threeDays">23°C / 14°C</span>
-        </div>
-      </div>
-      <div className="card">
-        <div className="card-body">
-          <span id="fourDays"></span>
-          <span id="info-fourDays">22°C / 14°C</span>
-        </div>
-      </div>
-      <div className="card">
-        <div className="card-body">
-          <span id="fiveDays"></span>
-          <span id="info-fiveDays">21°C / 14°C</span>
-        </div>
-      </div>
-    </div>
-  );
+    );
+  } else {
+    let apiKey = "c4c19c451f8b4a9b91d9624a7cb81259";
+    let lat = props.coordinates.lat;
+    let lon = props.coordinates.lon;
+    let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+    axios.get(url).then(showForecast);
+    return null;
+  }
 }

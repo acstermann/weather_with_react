@@ -6,6 +6,7 @@ import FormattedDate from "./FormattedDate";
 import Details from "./Details";
 import TemperatureUnit from "./TemperatureUnit";
 import WeatherIcon from "./WeatherIcon";
+import Forecast from "./Forecast";
 
 export default function Search(props) {
   let [city, setCity] = useState(props.defaultCity);
@@ -24,6 +25,7 @@ export default function Search(props) {
       city: response.data.name,
       icon: response.data.weather[0].icon,
       date: new Date(response.data.dt * 1000),
+      coordinates: response.data.coord,
     });
   }
 
@@ -33,7 +35,7 @@ export default function Search(props) {
   }
 
   function search() {
-    let apiKey = "c524de42a382642a117a494851a42046";
+    let apiKey = "c4c19c451f8b4a9b91d9624a7cb81259";
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(url).then(showTemperature);
   }
@@ -45,7 +47,7 @@ export default function Search(props) {
     return (
       <div className="Search">
         <span>
-          <WeatherIcon code={weatherData.icon} />
+          <WeatherIcon code={weatherData.icon} size={56} />
         </span>
         <form id="search-form" onSubmit={handleSubmit}>
           <input
@@ -63,8 +65,9 @@ export default function Search(props) {
         <TemperatureUnit celsius={weatherData.temperature} />
         <h4>Last updated on:</h4>
         <FormattedDate date={weatherData.date} />
-        <Hourly />
+        <Hourly data={weatherData} />
         <Details data={weatherData} />
+        <Forecast coordinates={weatherData.coordinates} />
       </div>
     );
   } else {
