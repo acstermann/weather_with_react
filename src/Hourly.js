@@ -1,39 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.css";
+import axios from "axios";
+import HourlyData from "./HourlyData";
 
-export default function Hourly() {
-  return (
-    <div className="row">
-      <div className="col">
-        <span id="now"> Now </span>
-        <span> o'clock</span>
-        <span id="tempNow">19°C</span>
+export default function Hourly(props) {
+  let [loaded, setLoaded] = useState(false);
+  let [hourly, setHourly] = useState(null);
+
+  useEffect(() => {
+    setLoaded(false);
+  }, [props.coordinates]);
+
+  function showHourlyForecast(response) {
+    setHourly(response.data.hourly);
+    setLoaded(true);
+  }
+  if (loaded) {
+    return (
+      <div className="row">
+        {hourly.map(function (hourlyForecast, index) {
+          if (index < 7) {
+            return (
+              <div className="col" key={index}>
+                <HourlyData data={hourlyForecast} />
+              </div>
+            );
+          } else {
+            return null;
+          }
+        })}
       </div>
-      <div className="col">
-        <span id="oneHour">9pm </span>
-        <span> o'clock</span>
-        <span id="tempOneHour">19°C</span>
-      </div>
-      <div className="col">
-        <span id="twoHours">10pm </span>
-        <span> o'clock</span>
-        <span id="tempTwoHours">19°C</span>
-      </div>
-      <div className="col">
-        <span id="threeHours">11pm </span>
-        <span> o'clock</span>
-        <span id="tempThreeHours">19°C</span>
-      </div>
-      <div className="col">
-        <span id="fourHours">12am </span>
-        <span> o'clock</span>
-        <span id="tempFourHours">19°C</span>
-      </div>
-      <div className="col">
-        <span id="fiveHours">1am </span>
-        <span> o'clock</span>
-        <span id="tempFiveHours">19°C</span>
-      </div>
-    </div>
-  );
+    );
+  } else {
+    let apiKey = "c4c19c451f8b4a9b91d9624a7cb81259";
+    let lat = props.coordinates.lat;
+    let lon = props.coordinates.lon;
+    let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+    axios.get(url).then(showHourlyForecast);
+    return null;
+  }
 }

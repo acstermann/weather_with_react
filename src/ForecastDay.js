@@ -20,11 +20,11 @@ export default function ForecastDay(props) {
   return (
     <div className="card">
       <div className="card-body">
-        <span id="tomorrow">{day()}</span>
-        <WeatherIcon code={Math.round(props.data.weather[0].icon)} size={36} />
-        <span id="info-tomorrow">
+        <div id="tomorrow">{day()}</div>
+        <WeatherIcon code={props.data.weather[0].icon} size={36} />
+        <div id="info-tomorrow">
           {maxTemperature()} / {minTemperature()}
-        </span>
+        </div>
       </div>
     </div>
   );

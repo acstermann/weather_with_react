@@ -65,7 +65,7 @@ export default function Search(props) {
         <TemperatureUnit celsius={weatherData.temperature} />
         <h4>Last updated on:</h4>
         <FormattedDate date={weatherData.date} />
-        <Hourly data={weatherData} />
+        <Hourly coordinates={weatherData.coordinates} />
         <Details data={weatherData} />
         <Forecast coordinates={weatherData.coordinates} />
       </div>
