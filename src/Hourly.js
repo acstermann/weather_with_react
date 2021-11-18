@@ -17,18 +17,20 @@ export default function Hourly(props) {
   }
   if (loaded) {
     return (
-      <div className="row">
-        {hourly.map(function (hourlyForecast, index) {
-          if (index < 7) {
-            return (
-              <div className="col" key={index}>
-                <HourlyData data={hourlyForecast} />
-              </div>
-            );
-          } else {
-            return null;
-          }
-        })}
+      <div className="Hourly">
+        <span className="row">
+          {hourly.map(function (hourlyForecast, index) {
+            if (index < 6) {
+              return (
+                <div className="col" key={index}>
+                  <HourlyData data={hourlyForecast} />
+                </div>
+              );
+            } else {
+              return null;
+            }
+          })}
+        </span>
       </div>
     );
   } else {

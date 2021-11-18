@@ -11,14 +11,16 @@ export default function HourlyDate(props) {
     let hour = new Date(props.data.dt * 1000);
     let clock = hour.getHours();
     if (clock < 10) {
-      clock = `0${clock}:00`;
+      clock = `0${clock}`;
     }
-    return clock;
+    return `${clock}:00`;
   }
   return (
-    <div className="col-2">
-      <div id="now"> {hour()} </div>
-      <div> o'clock</div>
+    <div className="hourlyData">
+      <div>
+        <span id="now"> {hour()} </span>
+        <span> o'clock</span>
+      </div>
       <WeatherIcon code={props.data.weather[0].icon} size={36} />
       <div id="tempNow">{temperature()}</div>
     </div>

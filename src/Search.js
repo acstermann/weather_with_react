@@ -57,13 +57,13 @@ export default function Search(props) {
             onChange={showCity}
           />
           <input type="submit" value="Search" />
+          <input type="submit" value="Current location" />
         </form>
-        <button>Current location</button>
         <h1 className="city" id="city">
           {weatherData.city}
         </h1>
         <TemperatureUnit celsius={weatherData.temperature} />
-        <h4>Last updated on:</h4>
+        <br />
         <FormattedDate date={weatherData.date} />
         <Hourly coordinates={weatherData.coordinates} />
         <Details data={weatherData} />
