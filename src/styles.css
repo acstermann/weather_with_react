@@ -99,3 +99,14 @@ button {
 .minTemp {
   opacity: 0.4;
 }
+.Searchfield {
+  margin-right: 5px;
+}
+.Update {
+  text-align: left;
+  font-size: 12px;
+}
+.pic {
+  width: 100%;
+  height: 100%;
+}

@@ -6,9 +6,8 @@ import Search from "./Search";
 function App() {
   return (
     <div className="App">
+      <Search defaultCity="Hamburg" />
       <div className="container">
-        <Search defaultCity="Hamburg" />
-
         <p>
           <a
             href="https://github.com/acstermann/weather_with_react"

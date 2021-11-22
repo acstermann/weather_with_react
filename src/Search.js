@@ -7,6 +7,7 @@ import Details from "./Details";
 import TemperatureUnit from "./TemperatureUnit";
 import WeatherIcon from "./WeatherIcon";
 import Forecast from "./Forecast";
+import background from "./images/clouds.jpg";
 
 export default function Search(props) {
   let [city, setCity] = useState(props.defaultCity);
@@ -46,25 +47,27 @@ export default function Search(props) {
   if (weatherData.ready) {
     return (
       <div className="Search">
-        <span>
-          <WeatherIcon code={weatherData.icon} size={56} />
-        </span>
-        <form id="search-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Change city"
-            id="search-text-input"
-            onChange={showCity}
-          />
-          <input type="submit" value="Search" />
-          <input type="submit" value="Current location" />
-        </form>
-        <h1 className="city" id="city">
-          {weatherData.city}
-        </h1>
-        <TemperatureUnit celsius={weatherData.temperature} />
-        <br />
-        <FormattedDate date={weatherData.date} />
+        <div style={{ backgroundImage: `url(${background})` }} className="pic">
+          <FormattedDate date={weatherData.date} />
+          <form id="search-form" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              className="Searchfield"
+              placeholder="Change city"
+              id="search-text-input"
+              onChange={showCity}
+            />
+            <input type="submit" value="Search" />
+          </form>
+          <span>
+            <WeatherIcon code={weatherData.icon} size={56} />
+          </span>
+          <h1 className="city" id="city">
+            {weatherData.city}
+          </h1>
+          <TemperatureUnit celsius={weatherData.temperature} />
+          <br />
+        </div>
         <Hourly coordinates={weatherData.coordinates} />
         <Details data={weatherData} />
         <Forecast coordinates={weatherData.coordinates} />
