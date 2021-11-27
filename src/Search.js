@@ -47,7 +47,12 @@ export default function Search(props) {
   if (weatherData.ready) {
     return (
       <div className="Search">
-        <div style={{ backgroundImage: `url(${background})` }} className="pic">
+        <div
+          className="pic"
+          style={{
+            background: `url(${background})`,
+          }}
+        >
           <FormattedDate date={weatherData.date} />
           <form id="search-form" onSubmit={handleSubmit}>
             <input
